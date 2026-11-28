@@ -5,4 +5,22 @@ description: A custom uCore image for whatever lives below your stack.
 base-image: ghcr.io/ublue-os/ucore
 image-version: lts
 modules:
+  - type: dnf
+    repos:
+      copr:
+        - adneos/systempub
+    install:
+      packages:
+        - fish
+        - systempub
+  - type: files
+    files:
+      - source: files
+        destination: /
+  - type: systemd
+    system:
+      enabled:
+        - tuned.service
+        - systemd-oomd.service
+        - rpm-ostreed-automatic.timer
   - type: signing
