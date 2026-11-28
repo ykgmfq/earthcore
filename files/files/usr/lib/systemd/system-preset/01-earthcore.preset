@@ -1,0 +1,2 @@
+enable systemd-oomd.service
+enable rpm-ostreed-automatic.timer

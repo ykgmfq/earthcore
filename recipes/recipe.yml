@@ -17,10 +17,4 @@ modules:
     files:
       - source: files
         destination: /
-  - type: systemd
-    system:
-      enabled:
-        - tuned.service
-        - systemd-oomd.service
-        - rpm-ostreed-automatic.timer
   - type: signing
