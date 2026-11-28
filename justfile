@@ -45,7 +45,7 @@ disk:
     printf 'setxattr security.selinux %s %s %s\n' "$H" $((${#H}+1)) "$R" "$S" $((${#S}+1)) "$R/.ssh" "$S" $((${#S}+1)) "$R/.ssh/authorized_keys" \
         | LIBGUESTFS_BACKEND=direct guestfish -a output/qcow2/disk.qcow2 -m /dev/sda4
 
-# Boot a copy of output/qcow2/disk.qcow2 (outside the repo, whose container labels qemu cannot read) as a user-session libvirt VM; ssh with `ssh -p 2222 core@localhost`
+# Boot a copy of the disk image as a user-session libvirt VM; the copy lives outside the repo, whose container labels qemu cannot read
 vm:
     mkdir -p ~/.local/share/libvirt/images
     cp --reflink=auto output/qcow2/disk.qcow2 ~/.local/share/libvirt/images/earthcore-test.qcow2
@@ -53,3 +53,9 @@ vm:
     virt-install --connect qemu:///session --name earthcore-test --memory 4096 --vcpus 2 \
         --import --disk ~/.local/share/libvirt/images/earthcore-test.qcow2 --os-variant fedora-coreos-stable \
         --network passt,portForward=2222:22 --graphics none --noautoconsole
+
+# Remove the test VM and its disk copy
+vm-clean:
+    -virsh --connect qemu:///session destroy earthcore-test
+    virsh --connect qemu:///session undefine earthcore-test --nvram
+    rm -f ~/.local/share/libvirt/images/earthcore-test.qcow2
