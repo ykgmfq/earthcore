@@ -6,9 +6,11 @@ COSIGN := "podman run --rm --user=0 --volume=.:/work:Z --workdir=/work --env=COS
 validate:
     {{BLUEBUILD}} validate {{RECIPE}}
 
-# Write the Containerfile the recipe expands to, for inspection
+# Write the Containerfile the recipe expands to, for inspection; without the signing module, which needs keys
 generate: validate
-    {{BLUEBUILD}} generate --output=Containerfile {{RECIPE}}
+    grep -v 'type: signing' {{RECIPE}} > recipes/.local.yml
+    {{BLUEBUILD}} generate --output=Containerfile recipes/.local.yml
+    rm recipes/.local.yml
 
 # Build the image locally from the generated Containerfile
 build: generate
