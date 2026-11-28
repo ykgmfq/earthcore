@@ -1,0 +1,63 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"yaml.schemas": {
+			"https://schema.blue-build.org/recipe-v1.json": "recipes/*.yml"
+		}
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "validate",
+				"type": "process",
+				"command": "just",
+				"args": ["validate"],
+				"problemMatcher": [],
+				"group": {
+					"kind": "test",
+					"isDefault": true
+				}
+			},
+			{
+				"label": "lint",
+				"type": "process",
+				"command": "just",
+				"args": ["lint"],
+				"problemMatcher": [],
+				"group": "test"
+			},
+			{
+				"label": "generate",
+				"type": "process",
+				"command": "just",
+				"args": ["generate"],
+				"problemMatcher": [],
+				"group": "build"
+			},
+			{
+				"label": "build",
+				"type": "process",
+				"command": "just",
+				"args": ["build"],
+				"problemMatcher": [],
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				}
+			}
+		]
+	},
+	"extensions": {
+		"recommendations": [
+			"redhat.vscode-yaml",
+			"nefrob.vscode-just-syntax",
+			"anthropic.claude-code",
+			"github.vscode-github-actions"
+		]
+	}
+}

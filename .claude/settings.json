@@ -1,0 +1,17 @@
+{
+    "permissions": {
+        "deny": [
+            "Bash(git push *)",
+            "Bash(git push)",
+            "Bash(just cosign)",
+            "Bash(gh secret *)"
+        ],
+        "allow": [
+            "WebFetch(domain:blue-build.org)",
+            "WebFetch(domain:github.com)",
+            "Bash(just validate)",
+            "Bash(just generate)",
+            "Bash(just lint)"
+        ]
+    }
+}

@@ -1,0 +1,16 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-yaml
+      - id: detect-private-key
+  - repo: local
+    hooks:
+      - id: bluebuild-validate
+        name: BlueBuild recipe validation
+        entry: just validate
+        language: system
+        files: ^recipes/
+        pass_filenames: false
