@@ -2,6 +2,9 @@
 name: Build
 on:
   workflow_dispatch:
+  schedule:
+    # UTC, four hours before hosts upgrade (Sat 05:00)
+    - cron: "0 1 * * 6"
 permissions: {}
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
