@@ -1,9 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended", "schedule:monthly"],
+  "extends": [
+    "config:recommended",
+    "helpers:pinGitHubActionDigests",
+    "schedule:weekly"
+  ],
   "prHourlyLimit": 0,
   "automerge": true,
   "automergeStrategy": "rebase",
+  "platformAutomerge": false,
+  "dependencyDashboard": false,
   "pre-commit": {
     "enabled": true
   }

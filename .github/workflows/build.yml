@@ -2,6 +2,7 @@
 name: Build
 on:
   workflow_dispatch:
+  pull_request:
   schedule:
     # UTC, four hours before hosts upgrade (Sat 05:00)
     - cron: "0 1 * * 6"
